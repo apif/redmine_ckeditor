@@ -20,3 +20,4 @@ Redmine::Plugin.register :redmine_ckeditor do
 end
 
 Loofah::HTML5::WhiteList::ALLOWED_PROTOCOLS.replace RedmineCkeditor.allowed_protocols
+Loofah::HTML5::WhiteList::ALLOWED_PROTOCOLS.add('data')
