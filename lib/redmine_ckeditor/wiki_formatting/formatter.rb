@@ -6,6 +6,11 @@ module RedmineCkeditor::WikiFormatting
       @text = text
     end
 
+    def clean_imgs_without_src(html)	  
+      html = html.gsub(/(<img(?!.*?src=(['"]).*?\2)[^>]*)(>)/, '')	  
+      html
+    end
+
     def to_html(&block)
       preserved = []
       text = @text.gsub(/<pre>\s*(.*?)\s*<\/pre>/m) {|m|
@@ -32,6 +37,7 @@ module RedmineCkeditor::WikiFormatting
       preserved.each.with_index(1) {|content, i|
         text.gsub!("____preserved_#{i}____", content)
       }
+      text = clean_imgs_without_src(text)
       text
     end
   end
